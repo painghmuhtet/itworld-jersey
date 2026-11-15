@@ -1,0 +1,50 @@
+name: Deploy ChitOo AI Worker
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-ai-worker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate Cloudflare secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Missing repository secret: CLOUDFLARE_API_TOKEN"
+            echo "::notice::Open Settings > Secrets and variables > Actions and add a secret with this exact name."
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Missing repository secret: CLOUDFLARE_ACCOUNT_ID"
+            echo "::notice::Add the Cloudflare Account ID as a separate repository secret."
+            exit 1
+          fi
+
+      - name: Install Wrangler
+        run: npm install --global wrangler@4
+
+      - name: Deploy ChitOo AI Worker
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler deploy

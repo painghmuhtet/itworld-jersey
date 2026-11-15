@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IT World Jersey</string>
+    <string name="brand_tagline">WEAR YOUR PASSION</string>
+    <string name="brand_subtitle">PREMIUM FOOTBALL JERSEYS</string>
+    <string name="price_on_request">Price on request</string>
+    <string name="click_to_order">Click to Order</string>
+    <string name="whatsapp_number">+60 11-2623 8907</string>
+    <string name="contact_email">contact@itworldjersey.store</string>
+    <string name="store_address">No. (18), Lebuh Pudu, City Centre, Kuala Lumpur, Malaysia 50050</string>
+    <string name="cd_brand_logo">IT WORLD JERSEY store logo</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_search">Search designs</string>
+    <string name="cd_zoom_image">Zoom product image</string>
+    <string name="cd_download_image">Save product image</string>
+    <string name="cd_whatsapp_order">Order via WhatsApp</string>
+    <string name="cd_previous_slide">Previous banner</string>
+    <string name="cd_next_slide">Next banner</string>
+    <string name="cd_send_message">Send message</string>
+    <string name="cd_pick_badge">Upload team badge</string>
+</resources>
